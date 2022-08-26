@@ -1,0 +1,14 @@
+package gt.edu.apuestasmundial.utils;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Mensaje {
+
+    private String mensaje;
+
+}
