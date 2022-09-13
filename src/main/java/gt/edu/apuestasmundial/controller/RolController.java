@@ -3,7 +3,6 @@ package gt.edu.apuestasmundial.controller;
 import gt.edu.apuestasmundial.model.Rol;
 import gt.edu.apuestasmundial.service.RolService;
 import gt.edu.apuestasmundial.utils.Mensaje;
-import io.swagger.annotations.Example;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -134,7 +133,7 @@ public class RolController {
     )
     public ResponseEntity<?> save(@RequestBody Rol body){
         // Si la descripción es vacía o en blanco entonces retorna BAD REQUEST
-        if(body.getNombre().isEmpty() || body.getNombre().isBlank()){
+        if(body.getNombre().name().isBlank() || body.getNombre().name().isBlank()){
             return new ResponseEntity(new Mensaje("Descripción es campo requerido"), HttpStatus.BAD_REQUEST);
         }
         rolService.save(body);
@@ -201,7 +200,7 @@ public class RolController {
         if(!rolService.existsById(id))
             return new ResponseEntity(new Mensaje("ID del registro no existe"), HttpStatus.NOT_FOUND);
         // Si la descripción es vacía o en blanco entonces retorna BAD REQUEST
-        if(body.getNombre().isEmpty() || body.getNombre().isBlank()){
+        if(body.getNombre().name().isBlank() || body.getNombre().name().isBlank()){
             return new ResponseEntity(new Mensaje("Descripción es campo requerido"), HttpStatus.BAD_REQUEST);
         }
         // Obtiene el registro por medio de ID
