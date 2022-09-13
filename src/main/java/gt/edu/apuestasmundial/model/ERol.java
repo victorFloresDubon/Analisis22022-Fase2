@@ -1,7 +1,7 @@
 package gt.edu.apuestasmundial.model;
 
 public enum ERol {
-    ROL_USUARIO,
-    ROL_ADMIN,
-    ROL_INVITADO
+    ROLE_USUARIO,
+    ROLE_ADMIN,
+    ROLE_INVITADO
 }

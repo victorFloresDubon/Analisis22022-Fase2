@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioServiceImp extends GenericServiceImp<Usuario, Long> implements UsuarioService {
 
@@ -20,5 +22,10 @@ public class UsuarioServiceImp extends GenericServiceImp<Usuario, Long> implemen
     @Override
     public boolean existsByNombre(String nombre) {
         return usuarioRepository.existsByNombre(nombre);
+    }
+
+    @Override
+    public Optional<Usuario> findByNombre(String nombre) {
+        return usuarioRepository.findByNombre(nombre);
     }
 }
