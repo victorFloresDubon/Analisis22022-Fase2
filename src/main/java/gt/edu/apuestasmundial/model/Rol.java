@@ -22,7 +22,8 @@ public class Rol {
     private Integer id;
 
     @Schema(name = "Nombre/Descripción del rol de usuario")
+    @Enumerated(EnumType.STRING)
     @Column(name = "nombre")
-    private String nombre;
+    private ERol nombre;
 
 }
