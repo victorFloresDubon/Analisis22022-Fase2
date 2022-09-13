@@ -1,6 +1,7 @@
 package gt.edu.apuestasmundial.service;
 
 import gt.edu.apuestasmundial.common.GenericServiceImp;
+import gt.edu.apuestasmundial.model.ERol;
 import gt.edu.apuestasmundial.model.Rol;
 import gt.edu.apuestasmundial.repository.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,12 @@ public class RolServiceImp extends GenericServiceImp<Rol, Integer> implements Ro
     }
 
     @Override
-    public boolean existsByNombre(String nombre) {
+    public boolean existsByNombre(ERol nombre) {
         return repository.existsByNombre(nombre);
     }
 
     @Override
-    public Optional<Rol> findByNombre(String nombre) {
+    public Optional<Rol> findByNombre(ERol nombre) {
         return repository.findByNombre(nombre);
     }
 }
