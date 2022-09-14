@@ -25,28 +25,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtProvider jwtProvider;
 
-    /*
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
-            throws IOException, ServletException {
-        try{
-            String token = getTokenFromRequest((HttpServletRequest) request);
-            log.info("Extracting token from HttpServletRequest: {}", token);
-
-            if(token != null && jwtProvider.validarToken(token)){
-                Authentication auth = jwtProvider.getAuthentication(token);
-
-                if(auth != null && !(auth instanceof AnonymousAuthenticationToken)){
-                    SecurityContextHolder.getContext().setAuthentication(auth);
-                }
-            }
-        } catch (Exception e){
-            log.error("Fallo en método dofilter {} ", e.getMessage());
-        }
-        filterChain.doFilter(request, response);
-    }
-
-     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
