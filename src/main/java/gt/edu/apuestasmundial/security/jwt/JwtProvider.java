@@ -37,6 +37,7 @@ public class JwtProvider {
     }
 
     public String crearToken(Authentication authentication){
+        // Obtenemos el nombre de usuario a partir de la autenticación
         String username = authentication.getName();
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Claims claims = Jwts.claims().setSubject(username);
@@ -58,7 +59,11 @@ public class JwtProvider {
     }
 
     public Authentication getAuthentication(String token){
-        Claims claims = Jwts.parserBuilder().setSigningKey(this.secretKey).build().parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(this.secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
 
         Object authoritiesClaim = claims.get(AUTHORITIES_KEY);
 

@@ -31,6 +31,10 @@ public class Usuario implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario")
+    private FotoUsuario fotoUsuario;
+
     @ManyToMany
     @JoinTable(
             name = "usuario_rol",
