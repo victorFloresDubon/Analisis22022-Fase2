@@ -145,7 +145,7 @@ public class UsuarioController {
             responses = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "Usuario autenticado con éxito",
+                            description = "Contraseña cambiada con éxito",
                             content = {
                                     @Content(
                                             mediaType = "application/json",
