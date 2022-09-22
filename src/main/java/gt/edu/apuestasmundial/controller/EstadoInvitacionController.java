@@ -193,12 +193,12 @@ public class EstadoInvitacionController {
 
     )
     @PutMapping
-    public ResponseEntity<?> update (@RequestBody EstadoInvitacion body){
-        if(!estadoInvitacionService.existsById(body.getId()))
+    public ResponseEntity<?> update (@RequestParam(name = "id") Long id, @RequestBody EstadoInvitacion body){
+        if(!estadoInvitacionService.existsById(id))
             return new ResponseEntity(new Mensaje("ID del registro no existe"), HttpStatus.BAD_REQUEST);
         if(body.getDescripcion().isBlank() || body.getDescripcion().isEmpty())
             return new ResponseEntity(new Mensaje("Descripción no puede ir vacía o en blanco"), HttpStatus.BAD_REQUEST);
-        EstadoInvitacion estadoInvitacion = estadoInvitacionService.getById(body.getId());
+        EstadoInvitacion estadoInvitacion = estadoInvitacionService.getById(id);
         estadoInvitacion.setDescripcion(body.getDescripcion());
         estadoInvitacionService.save(estadoInvitacion);
         return new ResponseEntity<EstadoInvitacion>(estadoInvitacion, HttpStatus.OK);
