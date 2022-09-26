@@ -15,13 +15,21 @@ import javax.persistence.*;
 public class FotoUsuario {
 
     @Id
-    @Column(name = "usuario")
-    private Long usuarioId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "url_img")
     private String url;
 
-    @OneToOne(mappedBy = "fotoUsuario")
+    @Column(name = "public_id")
+    private String publicId;
+
+    @Column(name = "nombre")
+    private String nombre;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario", referencedColumnName = "id")
     private Usuario usuario;
 
 }
