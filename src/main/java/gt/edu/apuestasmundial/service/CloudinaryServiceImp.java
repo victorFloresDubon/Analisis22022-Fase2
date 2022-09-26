@@ -2,6 +2,8 @@ package gt.edu.apuestasmundial.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import gt.edu.apuestasmundial.model.FotoUsuario;
+import gt.edu.apuestasmundial.repository.FotoUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +17,8 @@ import java.util.Map;
 @Service
 public class CloudinaryServiceImp implements CloudinaryService{
 
+    @Autowired
+    FotoUsuarioRepository fotoUsuarioRepository;
     Cloudinary cloudinary;
 
     private CloudinaryProperties properties;
@@ -42,9 +46,11 @@ public class CloudinaryServiceImp implements CloudinaryService{
     }
 
     @Override
-    public Map delete(String id){
+    public Map delete(Long id){
+        // Buscamos el registro de la imagen en la base de datos por ID
+        FotoUsuario fotoUsuario = fotoUsuarioRepository.findById(id).get();
         try{
-            Map result = cloudinary.uploader().destroy(id, ObjectUtils.emptyMap());
+            Map result = cloudinary.uploader().destroy(fotoUsuario.getPublicId(), ObjectUtils.emptyMap());
             return result;
         }catch (Exception e){
             return null;

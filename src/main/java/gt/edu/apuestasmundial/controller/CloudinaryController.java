@@ -9,7 +9,6 @@ import gt.edu.apuestasmundial.utils.Mensaje;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -173,8 +172,17 @@ public class CloudinaryController {
 
     )
     @DeleteMapping("/delete")
-    public ResponseEntity<?> delete(@RequestParam(name = "id") String id){
+    public ResponseEntity<?> delete(@RequestParam(name = "id") Long id){
+        if(!fotoUsuarioService.existsById(id))
+            return new ResponseEntity(new Mensaje("No existe imagen"), HttpStatus.NOT_FOUND);
+        // Borramos la imagen del repositorio remoto
         Map result = cloudinaryService.delete(id);
+        // Borramos la imagen de la base de datos si el resultado fue exitoso
+        if(result.get("result").equals("ok"))
+            fotoUsuarioService.delete(id);
+        else
+            return new ResponseEntity(new Mensaje("No se pudo eliminar la imagen"), HttpStatus.BAD_REQUEST);
+
         return new ResponseEntity<Map>(result, HttpStatus.OK);
     }
 

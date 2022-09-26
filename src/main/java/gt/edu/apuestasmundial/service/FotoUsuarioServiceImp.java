@@ -16,6 +16,11 @@ public class FotoUsuarioServiceImp extends GenericServiceImp<FotoUsuario, Long> 
 
     @Override
     public CrudRepository<FotoUsuario, Long> getRepository() {
-        return null;
+        return fotoUsuarioRepository;
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return fotoUsuarioRepository.existsById(id);
     }
 }
