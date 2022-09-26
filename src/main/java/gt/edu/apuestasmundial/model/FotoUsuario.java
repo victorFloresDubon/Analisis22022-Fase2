@@ -28,7 +28,7 @@ public class FotoUsuario {
     @Column(name = "nombre")
     private String nombre;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario", referencedColumnName = "id")
     private Usuario usuario;
 

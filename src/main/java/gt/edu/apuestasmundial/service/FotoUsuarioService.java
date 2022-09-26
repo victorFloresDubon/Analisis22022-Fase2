@@ -4,4 +4,5 @@ import gt.edu.apuestasmundial.common.GenericService;
 import gt.edu.apuestasmundial.model.FotoUsuario;
 
 public interface FotoUsuarioService extends GenericService<FotoUsuario, Long> {
+    boolean existsById(Long id);
 }
