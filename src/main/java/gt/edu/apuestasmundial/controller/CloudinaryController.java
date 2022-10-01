@@ -26,6 +26,7 @@ import java.util.Map;
 
 @Tag(name = "Cloudinary", description = "Controlador para la interfaz con Cloudinary")
 @RestController
+@CrossOrigin
 @RequestMapping("/cloudinary")
 public class CloudinaryController {
 
@@ -113,7 +114,7 @@ public class CloudinaryController {
     @PostMapping("/upload")
     public ResponseEntity<?> upload(
             @RequestParam(name = "userId") Long userId,
-            @RequestParam(name = "file") MultipartFile multipartFile
+            @RequestPart(name = "file") MultipartFile multipartFile
     ){
         try{
             BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
