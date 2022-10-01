@@ -190,4 +190,13 @@ public class UsuarioController {
         return new ResponseEntity<Long>(id, HttpStatus.OK);
     }
 
+
+    @GetMapping("/")
+    public ResponseEntity<List<Usuario>> getAll(){
+        List<Usuario> list = usuarioService.getAll();
+        if(list.isEmpty())
+            return new ResponseEntity(new Mensaje("No existen datos"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<List<Usuario>>(list, HttpStatus.OK);
+    }
+
 }

@@ -39,6 +39,8 @@ public class Usuario implements UserDetails {
     )
     private List<Rol> roles = new ArrayList<>();
 
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private FotoUsuario fotoUsuario;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream().map(rol -> new SimpleGrantedAuthority(rol.getNombre().name())).collect(Collectors.toList());
