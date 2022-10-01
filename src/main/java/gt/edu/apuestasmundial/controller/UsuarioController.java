@@ -33,6 +33,7 @@ import java.util.Map;
 
 @Tag(name = "Usuario", description = "Operaciones para el control de usuarios")
 @RestController
+@CrossOrigin
 @RequestMapping("/auth")
 public class UsuarioController {
 
@@ -179,6 +180,23 @@ public class UsuarioController {
 
         return new ResponseEntity(new Mensaje("Clave de usuario cambiada con éxito"), HttpStatus.OK);
 
+    }
+
+    @GetMapping("/findByNombre")
+    public ResponseEntity<Long> getByNombre(
+            @RequestParam(name = "nombre") String nombre
+    ){
+        Long id = usuarioService.findByNombre(nombre).get().getId();
+        return new ResponseEntity<Long>(id, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/")
+    public ResponseEntity<List<Usuario>> getAll(){
+        List<Usuario> list = usuarioService.getAll();
+        if(list.isEmpty())
+            return new ResponseEntity(new Mensaje("No existen datos"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<List<Usuario>>(list, HttpStatus.OK);
     }
 
 }

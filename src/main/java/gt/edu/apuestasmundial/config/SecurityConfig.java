@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(c -> c.authenticationEntryPoint(jwtEntryPoint))
                 .authorizeRequests(c -> c
-                        .antMatchers("/**/auth/**").permitAll()
+                        .antMatchers("/**/auth/**","/**/cloudinary/**").permitAll()
                         .antMatchers("/**/swagger-ui/**",
                                 "/**/swagger-resources/**",
                                 "/**/v3/**").permitAll()

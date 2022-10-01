@@ -1,5 +1,6 @@
 package gt.edu.apuestasmundial.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import gt.edu.apuestasmundial.model.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class FotoUsuario {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario", referencedColumnName = "id")
+    @JsonIgnore
     private Usuario usuario;
 
 }
