@@ -11,6 +11,7 @@ import gt.edu.apuestasmundial.service.RolService;
 import gt.edu.apuestasmundial.service.UsuarioService;
 import gt.edu.apuestasmundial.utils.Mensaje;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -182,6 +183,17 @@ public class UsuarioController {
 
     }
 
+    @Operation(
+            summary = "Obtener ID por nombre de usuario",
+            description = "Este método retorna el ID del usuario por medio de búsqueda por nombre",
+            tags = {"Usuario"},
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Datos obtenidos"
+                    )
+            }
+    )
     @GetMapping("/findByNombre")
     public ResponseEntity<Long> getByNombre(
             @RequestParam(name = "nombre") String nombre
@@ -190,7 +202,39 @@ public class UsuarioController {
         return new ResponseEntity<Long>(id, HttpStatus.OK);
     }
 
-
+    @Operation(
+            summary = "Obtiene todos los usuarios",
+            description = "Obtiene la información de todos los usuarios registrados",
+            tags = {"Usuario"},
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Datos obtenidos",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(
+                                                    schema = @Schema(
+                                                            implementation = Usuario.class
+                                                    )
+                                            )
+                                    )
+                            }
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "No se encontraron datos",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            schema = @Schema(
+                                                    implementation = Mensaje.class
+                                            )
+                                    )
+                            }
+                    )
+            }
+    )
     @GetMapping("/")
     public ResponseEntity<List<Usuario>> getAll(){
         List<Usuario> list = usuarioService.getAll();
